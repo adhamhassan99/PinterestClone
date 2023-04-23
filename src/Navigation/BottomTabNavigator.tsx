@@ -16,7 +16,15 @@ const AddButton = (props: any) => (
 const BottomTabNavigator = () => {
   return (
     <BottomTabs.Navigator
-      screenOptions={{headerShown: false, tabBarShowLabel: false}}>
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          backgroundColor: 'black',
+          paddingHorizontal: 30,
+          borderTopWidth: 0,
+        },
+      }}>
       <BottomTabs.Screen
         name="home"
         component={Home}
@@ -24,7 +32,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
               name="home"
-              color={focused ? 'black' : '#5f5f5f'}
+              color={focused ? 'white' : '#5f5f5f'}
               size={30}
             />
           ),
@@ -37,7 +45,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
               name="magnify"
-              color={focused ? 'black' : '#5f5f5f'}
+              color={focused ? 'white' : '#5f5f5f'}
               size={30}
             />
           ),
@@ -50,7 +58,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
               name="plus"
-              color={focused ? 'black' : '#5f5f5f'}
+              color={focused ? 'white' : '#5f5f5f'}
               size={30}
             />
           ),
@@ -64,7 +72,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
               name="chat-processing"
-              color={focused ? 'black' : '#5f5f5f'}
+              color={focused ? 'white' : '#5f5f5f'}
               size={30}
             />
           ),
@@ -77,7 +85,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
               name="account"
-              color={focused ? 'black' : '#5f5f5f'}
+              color={focused ? 'white' : '#5f5f5f'}
               size={30}
             />
           ),
