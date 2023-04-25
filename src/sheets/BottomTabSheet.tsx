@@ -20,7 +20,10 @@ const sheetButtons = [
   {
     title: 'Board',
     iconName: 'collage',
-    onPress: () => {},
+    onPress: async () => {
+      await SheetManager.hide('BottomTabSheet');
+      SheetManager.show('CreatBoardSheet');
+    },
   },
 ];
 
@@ -39,13 +42,16 @@ const BottomTabSheet = (props: SheetProps) => {
       </View>
       <View style={[styles.row, styles.buttonsContainer]}>
         {sheetButtons.map((button, index) => (
-          <Pressable style={styles.button} key={index}>
-            <MaterialCommunityIcons
-              name={button.iconName}
-              size={30}
-              color="white"
-            />
-          </Pressable>
+          <View key={index} style={styles.buttonView}>
+            <Pressable onPress={button.onPress} style={styles.button}>
+              <MaterialCommunityIcons
+                name={button.iconName}
+                size={30}
+                color="white"
+              />
+            </Pressable>
+            <Text style={styles.buttontext}>{button.title}</Text>
+          </View>
         ))}
       </View>
     </ActionSheet>
@@ -56,10 +62,10 @@ export default BottomTabSheet;
 
 const styles = StyleSheet.create({
   sheetContainer: {
-    flex: 0.2,
     backgroundColor: '#292929',
     paddingTop: 15,
     paddingLeft: 20,
+    paddingBottom: 30,
   },
   centerTextContainer: {
     marginRight: 28,
@@ -85,5 +91,13 @@ const styles = StyleSheet.create({
     padding: 17,
     marginHorizontal: 13,
     borderRadius: 17,
+  },
+  buttonView: {
+    alignItems: 'center',
+  },
+  buttontext: {
+    color: 'white',
+    marginTop: 10,
+    fontWeight: '500',
   },
 });

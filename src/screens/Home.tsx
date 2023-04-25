@@ -17,7 +17,7 @@ const Home = () => {
     fetchNextPage,
     hasPreviousPage,
     fetchPreviousPage,
-  } = useGetImages({});
+  } = useGetImages();
 
   // if (isLoading) return <ActivityIndicator size={60} />;
   // if (isError) return <ActivityIndicator size={60} />;
