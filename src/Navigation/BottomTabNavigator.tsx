@@ -40,7 +40,7 @@ const BottomTabNavigator = () => {
       />
       <BottomTabs.Screen
         name="home2"
-        component={Home}
+        component={Empty}
         options={{
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
@@ -67,7 +67,7 @@ const BottomTabNavigator = () => {
       />
       <BottomTabs.Screen
         name="home3"
-        component={Home}
+        component={Empty}
         options={{
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
@@ -80,7 +80,7 @@ const BottomTabNavigator = () => {
       />
       <BottomTabs.Screen
         name="home4"
-        component={Home}
+        component={Empty}
         options={{
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons

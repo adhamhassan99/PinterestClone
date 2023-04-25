@@ -1,57 +1,47 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  ActivityIndicator,
-  ScrollView,
-  Image,
-  RefreshControl,
-  Button,
-  Dimensions,
-} from 'react-native';
-import React from 'react';
+import {View, StyleSheet, Image, RefreshControl, Button} from 'react-native';
+import React, {useState, useEffect} from 'react';
 import {PersonalizedTopicsHeader} from '../components';
 import {useGetImages} from '../hooks/useGetImages';
 import MasonryList from '@react-native-seoul/masonry-list';
+import Pin from '../components/Pin/Pin';
+const Home = () => {
+  const [queryRes, setQueryRes] = useState([]);
 
-type Props = {};
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
+  const {
+    data,
+    refetch,
+    isRefetching,
+    isLoading,
+    isError,
+    hasNextPage,
+    fetchNextPage,
+    hasPreviousPage,
+    fetchPreviousPage,
+  } = useGetImages({});
 
-const Home = (props: Props) => {
-  const {data, isLoading, refetch, isRefetching, isError, remove} =
-    useGetImages({});
+  // if (isLoading) return <ActivityIndicator size={60} />;
+  // if (isError) return <ActivityIndicator size={60} />;
 
-  if (isLoading) return <ActivityIndicator size={60} />;
-  if (isError) return <ActivityIndicator size={60} />;
+  useEffect(() => {
+    let newArray = [];
+    data?.pages.map(item => {
+      newArray = [...newArray, ...item.data];
+    });
+    setQueryRes(newArray);
+  }, [data]);
 
   return (
     <View style={styles.screenContainer}>
       <PersonalizedTopicsHeader />
       <MasonryList
-        data={data?.data}
-        keyExtractor={(item): string => item.id}
+        data={queryRes}
+        keyExtractor={(_, index): string => index}
         numColumns={2}
-        renderItem={({item}) => (
-          <View style={styles.imageContainer}>
-            <Image
-              resizeMode="cover"
-              resizeMethod="auto"
-              alt="aa"
-              style={{
-                width: width / 2 - 15,
-                height: undefined,
-                aspectRatio: item.width / item.height,
-                borderRadius: 12,
-              }}
-              source={{uri: item?.urls.raw}}
-            />
-          </View>
-        )}
-        // refreshing={isLoadingNext}
+        renderItem={({item}) => <Pin item={item} />}
+        refreshing={isRefetching}
         onRefresh={() => refetch()}
-        // onEndReachedThreshold={0.1}
-        // onEndReached={() => loadNext(ITEM_CNT)}
+        onEndReachedThreshold={0.1}
+        onEndReached={() => fetchNextPage()}
       />
     </View>
   );
@@ -65,7 +55,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   imageContainer: {
-    marginHorizontal: 10,
-    marginVertical: 12,
+    // marginHorizontal: 10,
+    marginVertical: 10,
+    alignItems: 'center',
   },
 });

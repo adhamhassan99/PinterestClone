@@ -1,11 +1,15 @@
-import {View, Text} from 'react-native';
 import React, {ReactNode} from 'react';
-import {QueryClient, QueryClientProvider} from 'react-query';
-
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 type props = {
   children: ReactNode;
 };
 const queryClient = new QueryClient();
+
+if (__DEV__) {
+  import('react-query-native-devtools').then(({addPlugin}) => {
+    addPlugin({queryClient});
+  });
+}
 
 const ProvidersWrapper = ({children}: props) => {
   return (

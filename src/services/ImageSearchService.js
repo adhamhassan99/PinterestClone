@@ -1,6 +1,7 @@
 import {httpClient} from './httpClient';
 
 const querySearchImages = {
-  getImages: params => httpClient.get('photos/').then(response => response),
+  getImages: page =>
+    httpClient.get(`photos?page=${page}`).then(response => response),
 };
 export default querySearchImages;
