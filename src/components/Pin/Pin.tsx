@@ -50,7 +50,6 @@ const Pin = ({item}: Props) => {
         })
       }>
       <View style={styles(0, 0).pageContainer}>
-        {/* {loading && <ActivityIndicator color={'white'} size={30} />} */}
         <View style={styles().imageContainer}>
           <Image
             onError={() => setError(true)}
@@ -63,23 +62,22 @@ const Pin = ({item}: Props) => {
             source={{uri: item?.urls.regular}}
           />
         </View>
-        {!loading && (
-          <View style={styles().desContainer}>
-            <Text
-              ellipsizeMode="tail"
-              numberOfLines={2}
-              style={styles().description}>
-              {item.alt_description}
-            </Text>
-            <Pressable onPress={openShare}>
-              <MaterialCommunityIcons
-                name="dots-horizontal"
-                color={'white'}
-                size={20}
-              />
-            </Pressable>
-          </View>
-        )}
+
+        <View style={styles().desContainer}>
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={2}
+            style={styles().description}>
+            {item.alt_description}
+          </Text>
+          <Pressable onPress={openShare}>
+            <MaterialCommunityIcons
+              name="dots-horizontal"
+              color={'white'}
+              size={20}
+            />
+          </Pressable>
+        </View>
       </View>
     </Pressable>
   );
