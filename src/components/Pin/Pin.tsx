@@ -24,6 +24,7 @@ const shareOptions = url => {
 };
 const Pin = ({item}: Props) => {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const openShare = useCallback(
     () =>
@@ -37,13 +38,15 @@ const Pin = ({item}: Props) => {
     [],
   );
 
+  if (error) return null;
+
   return (
     <View style={styles(0, 0).pageContainer}>
       {loading && <ActivityIndicator color={'white'} size={30} />}
       <View style={styles().imageContainer}>
         <Image
+          onError={() => setError(true)}
           onLoadStart={() => setLoading(true)}
-          onLoad={() => setLoading(false)}
           onLoadEnd={() => setLoading(false)}
           resizeMode="cover"
           resizeMethod="auto"
