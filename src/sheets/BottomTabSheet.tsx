@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
   buttontext: {
     color: 'white',
-    marginTop: 10,
+    marginTop: 5,
     fontWeight: '500',
   },
 });

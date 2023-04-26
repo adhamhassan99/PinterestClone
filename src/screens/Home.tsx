@@ -2,8 +2,8 @@ import {View, StyleSheet, Image, RefreshControl, Button} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {PersonalizedTopicsHeader} from '../components';
 import {useGetImages} from '../hooks/useGetImages';
-import MasonryList from '@react-native-seoul/masonry-list';
 import Pin from '../components/Pin/Pin';
+import {MasonryFlashList} from '@shopify/flash-list';
 const Home = () => {
   const [queryRes, setQueryRes] = useState([]);
 
@@ -33,11 +33,13 @@ const Home = () => {
   return (
     <View style={styles.screenContainer}>
       <PersonalizedTopicsHeader />
-      <MasonryList
+
+      <MasonryFlashList
+        decelerationRate={'fast'}
         data={queryRes}
-        keyExtractor={(_, index): string => index}
         numColumns={2}
         renderItem={({item}) => <Pin item={item} />}
+        estimatedItemSize={284}
         refreshing={isRefetching}
         onRefresh={() => refetch()}
         onEndReachedThreshold={0.1}

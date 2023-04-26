@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import React, {useState, useCallback} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 
 type Props = {
   item: any;
@@ -23,6 +24,7 @@ const shareOptions = url => {
   };
 };
 const Pin = ({item}: Props) => {
+  const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -41,38 +43,45 @@ const Pin = ({item}: Props) => {
   if (error) return null;
 
   return (
-    <View style={styles(0, 0).pageContainer}>
-      {loading && <ActivityIndicator color={'white'} size={30} />}
-      <View style={styles().imageContainer}>
-        <Image
-          onError={() => setError(true)}
-          onLoadStart={() => setLoading(true)}
-          onLoadEnd={() => setLoading(false)}
-          resizeMode="cover"
-          resizeMethod="auto"
-          alt="aa"
-          style={styles(item.width, item.height).image}
-          source={{uri: item?.urls.regular}}
-        />
-      </View>
-      {!loading && (
-        <View style={styles().desContainer}>
-          <Text
-            ellipsizeMode="tail"
-            numberOfLines={2}
-            style={styles().description}>
-            {item.alt_description}
-          </Text>
-          <Pressable onPress={openShare}>
-            <MaterialCommunityIcons
-              name="dots-horizontal"
-              color={'white'}
-              size={20}
-            />
-          </Pressable>
+    <Pressable
+      onPress={() =>
+        navigation.navigate('PinDetail', {
+          item,
+        })
+      }>
+      <View style={styles(0, 0).pageContainer}>
+        {/* {loading && <ActivityIndicator color={'white'} size={30} />} */}
+        <View style={styles().imageContainer}>
+          <Image
+            onError={() => setError(true)}
+            onLoadStart={() => setLoading(true)}
+            onLoadEnd={() => setLoading(false)}
+            resizeMode="contain"
+            resizeMethod="resize"
+            alt="aa"
+            style={styles(item.width, item.height).image}
+            source={{uri: item?.urls.regular}}
+          />
         </View>
-      )}
-    </View>
+        {!loading && (
+          <View style={styles().desContainer}>
+            <Text
+              ellipsizeMode="tail"
+              numberOfLines={2}
+              style={styles().description}>
+              {item.alt_description}
+            </Text>
+            <Pressable onPress={openShare}>
+              <MaterialCommunityIcons
+                name="dots-horizontal"
+                color={'white'}
+                size={20}
+              />
+            </Pressable>
+          </View>
+        )}
+      </View>
+    </Pressable>
   );
 };
 

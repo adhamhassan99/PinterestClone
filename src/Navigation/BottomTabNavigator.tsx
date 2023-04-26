@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Home} from '../screens';
 import {Pressable} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {SheetManager} from 'react-native-actions-sheet/dist/src/sheetmanager';
+import HomeStackNavigator from './HomeStackNavigator';
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -26,8 +26,8 @@ const BottomTabNavigator = () => {
         },
       }}>
       <BottomTabs.Screen
-        name="home"
-        component={Home}
+        name="HomeStack"
+        component={HomeStackNavigator}
         options={{
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
