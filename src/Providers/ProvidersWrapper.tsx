@@ -1,5 +1,11 @@
-import React, {ReactNode} from 'react';
+import React, {ReactNode, useState} from 'react';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {ThemeProvider} from 'styled-components';
+import {light, dark} from '../theme';
+import {SheetProvider} from 'react-native-actions-sheet';
+import {Provider} from 'react-redux';
+import {store} from '../store';
+
 type props = {
   children: ReactNode;
 };
@@ -13,7 +19,11 @@ if (__DEV__) {
 
 const ProvidersWrapper = ({children}: props) => {
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <SheetProvider>{children}</SheetProvider>
+      </QueryClientProvider>
+    </Provider>
   );
 };
 

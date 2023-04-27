@@ -2,9 +2,7 @@ import {View, Text, StyleSheet, Pressable} from 'react-native';
 import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-type Props = {};
-
-const ExtendedPinFooter = (props: Props) => {
+const ExtendedPinFooter = () => {
   return (
     <View style={styles().footerContainer}>
       <Pressable>

@@ -11,10 +11,24 @@ import {
 import React, {useState, useCallback} from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
+import styled from 'styled-components/native';
+import {useTheme} from 'styled-components';
 
 type Props = {
   item: any;
 };
+
+const PageView = styled.View`
+  margin: 10px;
+  background-color: ${props => props.theme.colors.backgroundColor};
+`;
+
+const DescriptionText = styled.Text`
+  color: ${props => props.theme.colors.textColor};
+  max-width: 80%;
+  margin-top: 5px;
+`;
+
 const width = Dimensions.get('window').width;
 const shareOptions = url => {
   return {
@@ -24,6 +38,7 @@ const shareOptions = url => {
   };
 };
 const Pin = ({item}: Props) => {
+  // const theme = useTheme();
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -39,9 +54,9 @@ const Pin = ({item}: Props) => {
         }),
     [],
   );
+  // console.log(theme);
 
   if (error) return null;
-
   return (
     <Pressable
       onPress={() =>
@@ -49,7 +64,8 @@ const Pin = ({item}: Props) => {
           item,
         })
       }>
-      <View style={styles(0, 0).pageContainer}>
+      {/* <View style={styles().pageContainer}> */}
+      <PageView>
         <View style={styles().imageContainer}>
           <Image
             onError={() => setError(true)}
@@ -64,12 +80,12 @@ const Pin = ({item}: Props) => {
         </View>
 
         <View style={styles().desContainer}>
-          <Text
+          {/* <Text
             ellipsizeMode="tail"
             numberOfLines={2}
-            style={styles().description}>
-            {item.alt_description}
-          </Text>
+            style={styles().description}> */}
+          <DescriptionText>{item.alt_description}</DescriptionText>
+          {/* </Text> */}
           <Pressable onPress={openShare}>
             <MaterialCommunityIcons
               name="dots-horizontal"
@@ -78,7 +94,8 @@ const Pin = ({item}: Props) => {
             />
           </Pressable>
         </View>
-      </View>
+      </PageView>
+      {/* </View> */}
     </Pressable>
   );
 };

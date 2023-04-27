@@ -1,13 +1,30 @@
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import ExpandedPin from '../ExpandedPin/ExpandedPin';
-import {RouteProp} from '@react-navigation/native';
+import {NavigationProp, RouteProp} from '@react-navigation/native';
 
 type Props = {
   route: RouteProp<any>;
+  navigation: NavigationProp<any>;
 };
 
-const PinDetail = ({route}: Props) => {
+const PinDetail = ({route, navigation}: Props) => {
+  useEffect(() => {
+    navigation.getParent()?.setOptions({
+      tabBarStyle: {
+        display: 'none',
+      },
+    });
+    return () =>
+      navigation.getParent()?.setOptions({
+        tabBarStyle: {
+          backgroundColor: 'black',
+          paddingHorizontal: 30,
+          borderTopWidth: 0,
+        },
+      });
+  }, [navigation]);
+
   return (
     <View style={styles.screenContainer}>
       <ExpandedPin uri={route.params.item.urls.full} />

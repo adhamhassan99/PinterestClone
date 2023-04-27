@@ -19,13 +19,17 @@ const ExpandedPin = ({uri}: Props) => {
         style={styles.imageBG}>
         <View style={styles.rowBetween}>
           <Pressable onPress={() => navigation.goBack()}>
-            <MaterialCommunityIcons name="close" color={'white'} size={25} />
+            <MaterialCommunityIcons
+              name="chevron-left"
+              color={'white'}
+              size={30}
+            />
           </Pressable>
           <Pressable onPress={() => {}}>
             <MaterialCommunityIcons
               name="dots-horizontal"
               color={'white'}
-              size={25}
+              size={30}
             />
           </Pressable>
         </View>

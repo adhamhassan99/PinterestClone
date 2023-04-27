@@ -28,14 +28,17 @@ const BottomTabNavigator = () => {
       <BottomTabs.Screen
         name="HomeStack"
         component={HomeStackNavigator}
-        options={{
-          tabBarIcon: ({focused}) => (
-            <MaterialCommunityIcons
-              name="home"
-              color={focused ? 'white' : '#5f5f5f'}
-              size={30}
-            />
-          ),
+        options={({route}) => {
+          return {
+            tabBarStyle: {display: 'none'},
+            tabBarIcon: ({focused}) => (
+              <MaterialCommunityIcons
+                name="home"
+                color={focused ? 'white' : '#5f5f5f'}
+                size={30}
+              />
+            ),
+          };
         }}
       />
       <BottomTabs.Screen
