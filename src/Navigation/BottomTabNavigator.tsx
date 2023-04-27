@@ -5,6 +5,7 @@ import {Pressable} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {SheetManager} from 'react-native-actions-sheet/dist/src/sheetmanager';
 import HomeStackNavigator from './HomeStackNavigator';
+import {useTheme} from 'styled-components';
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -14,13 +15,16 @@ const AddButton = (props: any) => (
 );
 
 const BottomTabNavigator = () => {
+  const theme = useTheme();
   return (
     <BottomTabs.Navigator
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
+
         tabBarStyle: {
-          backgroundColor: 'black',
+          shadowColor: 'transparent',
+          backgroundColor: theme.backgroundColor,
           paddingHorizontal: 30,
           borderTopWidth: 0,
         },
@@ -29,12 +33,13 @@ const BottomTabNavigator = () => {
         name="HomeStack"
         component={HomeStackNavigator}
         options={({route}) => {
+          console.log(route, 'path');
           return {
-            tabBarStyle: {display: 'none'},
+            // tabBarStyle: {display: 'none'},
             tabBarIcon: ({focused}) => (
               <MaterialCommunityIcons
                 name="home"
-                color={focused ? 'white' : '#5f5f5f'}
+                color={focused ? theme.iconActive : theme.iconInactive}
                 size={30}
               />
             ),
@@ -48,7 +53,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
               name="magnify"
-              color={focused ? 'white' : '#5f5f5f'}
+              color={focused ? theme.iconActive : theme.iconInactive}
               size={30}
             />
           ),
@@ -61,7 +66,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
               name="plus"
-              color={focused ? 'white' : '#5f5f5f'}
+              color={focused ? theme.iconActive : theme.iconInactive}
               size={30}
             />
           ),
@@ -75,7 +80,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
               name="chat-processing"
-              color={focused ? 'white' : '#5f5f5f'}
+              color={focused ? theme.iconActive : theme.iconInactive}
               size={30}
             />
           ),
@@ -88,7 +93,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
               name="account"
-              color={focused ? 'white' : '#5f5f5f'}
+              color={focused ? theme.iconActive : theme.iconInactive}
               size={30}
             />
           ),

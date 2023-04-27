@@ -7,7 +7,10 @@ const HomeStack = createNativeStackNavigator();
 
 const HomeStackNavigator = () => {
   return (
-    <HomeStack.Navigator screenOptions={{headerShown: false}}>
+    <HomeStack.Navigator
+      screenOptions={({navigation}) => {
+        return {headerShown: false};
+      }}>
       <HomeStack.Screen name="Home" component={Home} />
       <HomeStack.Screen name="PinDetail" component={PinDetail} />
     </HomeStack.Navigator>

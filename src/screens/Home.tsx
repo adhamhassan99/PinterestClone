@@ -4,6 +4,13 @@ import {PersonalizedTopicsHeader} from '../components';
 import {useGetImages} from '../hooks/useGetImages';
 import Pin from '../components/Pin/Pin';
 import {MasonryFlashList} from '@shopify/flash-list';
+import styled from 'styled-components/native';
+
+const PageContainer = styled.View`
+  background-color: ${props => props.theme.colors.backgroundColor};
+  flex: 1;
+`;
+
 const Home = () => {
   const [queryRes, setQueryRes] = useState([]);
 
@@ -31,7 +38,8 @@ const Home = () => {
   }, [data]);
 
   return (
-    <View style={styles.screenContainer}>
+    // <View style={styles.screenContainer}>
+    <PageContainer>
       <PersonalizedTopicsHeader />
 
       <MasonryFlashList
@@ -45,7 +53,8 @@ const Home = () => {
         onEndReachedThreshold={0.1}
         onEndReached={() => fetchNextPage()}
       />
-    </View>
+    </PageContainer>
+    // </View>
   );
 };
 

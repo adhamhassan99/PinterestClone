@@ -2,6 +2,7 @@ import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import React, {useEffect} from 'react';
 import ExpandedPin from '../ExpandedPin/ExpandedPin';
 import {NavigationProp, RouteProp} from '@react-navigation/native';
+import {useTheme} from 'styled-components';
 
 type Props = {
   route: RouteProp<any>;
@@ -9,6 +10,7 @@ type Props = {
 };
 
 const PinDetail = ({route, navigation}: Props) => {
+  const theme = useTheme();
   useEffect(() => {
     navigation.getParent()?.setOptions({
       tabBarStyle: {
@@ -18,7 +20,8 @@ const PinDetail = ({route, navigation}: Props) => {
     return () =>
       navigation.getParent()?.setOptions({
         tabBarStyle: {
-          backgroundColor: 'black',
+          shadowColor: 'transparent',
+          backgroundColor: theme.backgroundColor,
           paddingHorizontal: 30,
           borderTopWidth: 0,
         },

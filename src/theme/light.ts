@@ -2,6 +2,8 @@ export default {
   colors: {
     backgroundColor: 'white',
     textColor: 'black',
+    iconActive: 'black',
+    iconInactive: '#5f5f5f',
   },
   fontSizes: {
     small: '5px',
