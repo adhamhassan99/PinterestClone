@@ -1,7 +1,9 @@
 export default {
   colors: {
     backgroundColor: 'black',
+    backgroundColorInverse: 'white',
     textColor: 'white',
+    textColorInverse: 'black',
     iconActive: 'white',
     iconInactive: '#5f5f5f',
   },

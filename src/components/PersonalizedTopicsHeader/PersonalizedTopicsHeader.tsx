@@ -1,5 +1,6 @@
 import {View, Text, Pressable, ScrollView, StyleSheet} from 'react-native';
 import React, {SetStateAction, useRef, useState} from 'react';
+import styled from 'styled-components/native';
 
 type Props = {};
 const interests = [
@@ -41,6 +42,33 @@ const interests = [
   },
 ];
 
+const ButtonContainer = styled.Pressable`
+  background-color: ${props =>
+    props.selectedId === props.index
+      ? props.theme.colors.backgroundColorInverse
+      : 'transparent'};
+  margin-left: 0;
+  margin-right: 0px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 20px;
+`;
+
+const ButtonText = styled.Text`
+  font-weight: 600;
+  font-size: 15px;
+  color: ${props =>
+    props.selectedId === props.index
+      ? props.theme.colors.textColorInverse
+      : props.theme.colors.textColor};
+`;
+
+const PageContainer = styled.View`
+  padding: 10px 30px;
+`;
+
 const PersonalizedTopicsHeader = (props: Props) => {
   const ScrollRef = useRef<ScrollView>(null);
   const [selectedBtn, setSelectedBtn] = useState(0);
@@ -55,13 +83,13 @@ const PersonalizedTopicsHeader = (props: Props) => {
   };
 
   return (
-    <View style={styles(selectedBtn, 0).pageContainer}>
+    <PageContainer>
       <ScrollView
         ref={ScrollRef}
         showsHorizontalScrollIndicator={false}
         horizontal>
         {interests.map((interest, index) => (
-          <Pressable
+          <ButtonContainer
             onLayout={event => {
               const layout = event.nativeEvent.layout;
               coords[interest.id] = layout.x;
@@ -69,15 +97,16 @@ const PersonalizedTopicsHeader = (props: Props) => {
             onPress={() => {
               handleClick(index, interest.id);
             }}
-            style={styles(selectedBtn, index).buttonContainer}
+            selectedId={selectedBtn}
+            index={index}
             key={index}>
-            <Text style={styles(selectedBtn, index).btnText}>
+            <ButtonText selectedId={selectedBtn} index={index}>
               {interest.title}
-            </Text>
-          </Pressable>
+            </ButtonText>
+          </ButtonContainer>
         ))}
       </ScrollView>
-    </View>
+    </PageContainer>
   );
 };
 
