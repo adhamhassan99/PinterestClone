@@ -1,4 +1,4 @@
-import {View, Text, Pressable, ScrollView, StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 import React, {SetStateAction, useRef, useState} from 'react';
 import styled from 'styled-components/native';
 
@@ -66,7 +66,7 @@ const ButtonText = styled.Text`
 `;
 
 const PageContainer = styled.View`
-  padding: 10px 30px;
+  padding: 10px 70px;
 `;
 
 const PersonalizedTopicsHeader = (props: Props) => {

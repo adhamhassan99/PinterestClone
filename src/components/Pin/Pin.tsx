@@ -13,6 +13,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import styled from 'styled-components/native';
 import {useTheme} from 'styled-components';
+import {useSelector} from 'react-redux';
 
 type Props = {
   item: any;
@@ -42,6 +43,7 @@ const Pin = ({item}: Props) => {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const activeTheme = useSelector(state => state.theme.value);
 
   const openShare = useCallback(
     () =>
@@ -65,7 +67,7 @@ const Pin = ({item}: Props) => {
         })
       }>
       {/* <View style={styles().pageContainer}> */}
-      <PageView>
+      <PageView x={10}>
         <View style={styles().imageContainer}>
           <Image
             onError={() => setError(true)}
@@ -89,7 +91,7 @@ const Pin = ({item}: Props) => {
           <Pressable onPress={openShare}>
             <MaterialCommunityIcons
               name="dots-horizontal"
-              color={'white'}
+              color={activeTheme === 'light' ? 'black' : 'white'}
               size={20}
             />
           </Pressable>
@@ -113,7 +115,6 @@ const styles = (imgWidth = 0, height = 0) =>
     },
     image: {
       width: width / 2 - 15,
-      height: undefined,
       aspectRatio: imgWidth / height,
       borderRadius: 12,
     },

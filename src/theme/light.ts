@@ -1,4 +1,5 @@
 export default {
+  type: 'light',
   colors: {
     backgroundColor: 'white',
     backgroundColorInverse: 'black',
@@ -6,6 +7,7 @@ export default {
     textColorInverse: 'white',
     iconActive: 'black',
     iconInactive: '#5f5f5f',
+    searchBarIcon: '#5f5f5f',
   },
   fontSizes: {
     small: '5px',

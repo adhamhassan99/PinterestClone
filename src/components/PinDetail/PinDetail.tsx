@@ -3,6 +3,7 @@ import React, {useEffect} from 'react';
 import ExpandedPin from '../ExpandedPin/ExpandedPin';
 import {NavigationProp, RouteProp} from '@react-navigation/native';
 import {useTheme} from 'styled-components';
+import {useSelector} from 'react-redux';
 
 type Props = {
   route: RouteProp<any>;
@@ -11,6 +12,7 @@ type Props = {
 
 const PinDetail = ({route, navigation}: Props) => {
   const theme = useTheme();
+  const activeTheme = useSelector(state => state.theme.value);
   useEffect(() => {
     navigation.getParent()?.setOptions({
       tabBarStyle: {
@@ -21,12 +23,12 @@ const PinDetail = ({route, navigation}: Props) => {
       navigation.getParent()?.setOptions({
         tabBarStyle: {
           shadowColor: 'transparent',
-          backgroundColor: theme.backgroundColor,
+          backgroundColor: theme.colors.backgroundColor,
           paddingHorizontal: 30,
           borderTopWidth: 0,
         },
       });
-  }, [navigation]);
+  }, [navigation, theme.colors.backgroundColor, activeTheme]);
 
   return (
     <View style={styles.screenContainer}>

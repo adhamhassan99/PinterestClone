@@ -6,6 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {SheetManager} from 'react-native-actions-sheet/dist/src/sheetmanager';
 import HomeStackNavigator from './HomeStackNavigator';
 import {useTheme} from 'styled-components';
+import {Search} from '../screens';
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -16,7 +17,6 @@ const AddButton = (props: any) => (
 
 const BottomTabNavigator = () => {
   const theme = useTheme();
-  console.log(theme);
   return (
     <BottomTabs.Navigator
       screenOptions={{
@@ -49,8 +49,8 @@ const BottomTabNavigator = () => {
         }}
       />
       <BottomTabs.Screen
-        name="home2"
-        component={Empty}
+        name="Search"
+        component={Search}
         options={{
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
