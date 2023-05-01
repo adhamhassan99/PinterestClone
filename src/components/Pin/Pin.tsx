@@ -86,7 +86,9 @@ const Pin = ({item}: Props) => {
             ellipsizeMode="tail"
             numberOfLines={2}
             style={styles().description}> */}
-          <DescriptionText>{item.alt_description}</DescriptionText>
+          <DescriptionText numberOfLines={2}>
+            {item.alt_description}
+          </DescriptionText>
           {/* </Text> */}
           <Pressable onPress={openShare}>
             <MaterialCommunityIcons

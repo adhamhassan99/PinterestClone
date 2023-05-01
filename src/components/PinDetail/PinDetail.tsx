@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, StatusBar} from 'react-native';
 import React, {useEffect} from 'react';
 import ExpandedPin from '../ExpandedPin/ExpandedPin';
 import {NavigationProp, RouteProp} from '@react-navigation/native';
@@ -31,9 +31,12 @@ const PinDetail = ({route, navigation}: Props) => {
   }, [navigation, theme.colors.backgroundColor, activeTheme]);
 
   return (
-    <View style={styles.screenContainer}>
-      <ExpandedPin uri={route.params.item.urls.full} />
-    </View>
+    <>
+      <StatusBar hidden />
+      <View style={styles.screenContainer}>
+        <ExpandedPin uri={route.params.item.urls.full} />
+      </View>
+    </>
   );
 };
 
