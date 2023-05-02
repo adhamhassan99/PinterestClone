@@ -1,7 +1,8 @@
 import React from 'react';
-import {Button} from 'react-native';
+import {Image} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import styled from 'styled-components/native';
 
 async function onGoogleButtonPress() {
   // Check if your device supports Google Play
@@ -16,14 +17,43 @@ async function onGoogleButtonPress() {
   return auth().signInWithCredential(googleCredential);
 }
 
+const ButtonContainer = styled.Pressable`
+  background-color: #4285f4;
+  width: 100%;
+  margin-top: 10px;
+  align-items: center;
+  padding: 10px 0px;
+
+  border-radius: 5px;
+`;
+
+const ButtonText = styled.Text`
+  font-size: 18px;
+  color: white;
+  font-weight: 600;
+`;
+
 function GoogleSignInBtn() {
   return (
-    <Button
-      title="Google Sign-In"
+    <ButtonContainer
       onPress={() =>
         onGoogleButtonPress().then(() => console.log('Signed in with Google!'))
-      }
-    />
+      }>
+      <Image
+        resizeMethod="auto"
+        resizeMode="contain"
+        style={{
+          width: 30,
+          height: 30,
+          position: 'absolute',
+          left: 10,
+          top: 8,
+          borderRadius: 5,
+        }}
+        source={require('../../assets/googleIcon.jpg')}
+      />
+      <ButtonText>google sign in</ButtonText>
+    </ButtonContainer>
   );
 }
 

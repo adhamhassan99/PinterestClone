@@ -36,7 +36,7 @@ const Search = (props: Props) => {
   const theme = useTheme();
   return (
     <PageContainer>
-      <Row>
+      <>
         <SearchContainer>
           {!searchFocused && (
             <MaterialCommunityIcons
@@ -57,7 +57,7 @@ const Search = (props: Props) => {
             size={20}
           />
         </SearchContainer>
-      </Row>
+      </>
     </PageContainer>
   );
 };

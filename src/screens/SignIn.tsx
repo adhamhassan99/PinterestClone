@@ -2,6 +2,7 @@ import {Image, KeyboardAvoidingView} from 'react-native';
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import GoogleSignInBtn from '../components/GoogleSignInBtn/GoogleSignInBtn';
+import {EmailSignIn} from '../utilities/EmailPassSIgnIn';
 
 const PageContainer = styled.View`
   flex: 1;
@@ -44,11 +45,31 @@ const Buttontext = styled.Text`
   font-weight: 600;
 `;
 
+const DividerText = styled.Text`
+  color: ${props => props.theme.colors.textColor};
+  font-weight: 700;
+  font-size: 20px;
+  margin-top: 15px;
+`;
+
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
+  const [mailError, setMailError] = useState(false);
+
+  const handleSignIn = async () => {
+    try {
+      await EmailSignIn(email, password);
+      setMailError(false);
+    } catch (error) {
+      if (error.message === 'invalid mail') {
+        setMailError(true);
+      }
+    }
+  };
+
   return (
     <PageContainer>
       <Image
@@ -75,9 +96,11 @@ const SignIn = () => {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <SignInButton>
+
+      <SignInButton onPress={handleSignIn}>
         <Buttontext>Log In</Buttontext>
       </SignInButton>
+      <DividerText>Or</DividerText>
       <GoogleSignInBtn />
     </PageContainer>
   );
