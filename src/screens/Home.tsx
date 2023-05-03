@@ -1,4 +1,10 @@
-import React, {useState, useEffect, useCallback, useRef} from 'react';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  SetStateAction,
+} from 'react';
 import {PersonalizedTopicsHeader} from '../components';
 import {useGetImages} from '../hooks/useGetImages';
 import Pin from '../components/Pin/Pin';
@@ -33,7 +39,7 @@ const IconContainer = styled.Pressable`
 const Home = () => {
   const ViewRef = useRef();
   const dispatch = useDispatch();
-  const [queryRes, setQueryRes] = useState([]);
+  const [queryRes, setQueryRes] = useState<SetStateAction<never[]>>([]);
   const theme = useTheme();
   const activeTheme = useSelector(state => state.theme.value);
   const navigation = useNavigation();
@@ -48,7 +54,7 @@ const Home = () => {
   } = useGetImages();
 
   useEffect(() => {
-    let newArray = [];
+    let newArray: any[] = [];
     data?.pages.map(item => {
       newArray = [...newArray, ...item.data];
     });
@@ -88,7 +94,6 @@ const Home = () => {
         barStyle={activeTheme === 'light' ? 'dark-content' : 'light-content'}
         backgroundColor={activeTheme === 'light' ? 'white' : 'black'}
       />
-      <Button title={'sign out'} onPress={SignOutGoogle} />
       <PageContainer>
         <Animatable.View ref={ViewRef} style={{zIndex: 20}}>
           <IconContainer onPress={toggleTheme}>

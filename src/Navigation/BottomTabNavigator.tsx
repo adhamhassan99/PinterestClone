@@ -6,7 +6,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {SheetManager} from 'react-native-actions-sheet/dist/src/sheetmanager';
 import HomeStackNavigator from './HomeStackNavigator';
 import {useTheme} from 'styled-components';
-import {Search} from '../screens';
+import SearchStackNavigator from './SearchStackNavigator';
+import {useRoute} from '@react-navigation/native';
+import {Profile} from '../screens';
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -16,6 +18,8 @@ const AddButton = (props: any) => (
 );
 
 const BottomTabNavigator = () => {
+  const route = useRoute();
+  console.log(route.name, 'route name');
   const theme = useTheme();
   return (
     <BottomTabs.Navigator
@@ -50,7 +54,7 @@ const BottomTabNavigator = () => {
       />
       <BottomTabs.Screen
         name="Search"
-        component={Search}
+        component={SearchStackNavigator}
         options={{
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons
@@ -95,8 +99,8 @@ const BottomTabNavigator = () => {
         }}
       />
       <BottomTabs.Screen
-        name="home4"
-        component={Empty}
+        name="profile"
+        component={Profile}
         options={{
           tabBarIcon: ({focused}) => (
             <MaterialCommunityIcons

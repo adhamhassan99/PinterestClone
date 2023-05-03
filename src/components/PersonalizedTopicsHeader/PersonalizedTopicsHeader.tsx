@@ -1,6 +1,7 @@
 import {ScrollView, StyleSheet} from 'react-native';
 import React, {SetStateAction, useRef, useState} from 'react';
 import styled from 'styled-components/native';
+import {useNavigation} from '@react-navigation/native';
 
 type Props = {};
 const interests = [
@@ -70,16 +71,30 @@ const PageContainer = styled.View`
 `;
 
 const PersonalizedTopicsHeader = (props: Props) => {
+  const navigation = useNavigation();
   const ScrollRef = useRef<ScrollView>(null);
   const [selectedBtn, setSelectedBtn] = useState(0);
   const [coords, setCoords] = useState([]);
-  const handleClick = (id: SetStateAction<number>, xPosition: number) => {
+  const handleClick = (
+    id: SetStateAction<number>,
+    xPosition: number,
+    queryString: string,
+  ) => {
     setSelectedBtn(id);
     ScrollRef.current?.scrollTo({
       x: coords[xPosition] - 50,
       y: 0,
       animated: true,
     });
+
+    setTimeout(() => {
+      navigation.navigate('Search', {
+        screen: 'SearchDetail',
+        params: {
+          queryString,
+        },
+      });
+    }, 10);
   };
 
   return (
@@ -95,7 +110,7 @@ const PersonalizedTopicsHeader = (props: Props) => {
               coords[interest.id] = layout.x;
             }}
             onPress={() => {
-              handleClick(index, interest.id);
+              handleClick(index, interest.id, interest.title);
             }}
             selectedId={selectedBtn}
             index={index}
