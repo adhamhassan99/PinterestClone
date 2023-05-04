@@ -14,6 +14,7 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 import styled from 'styled-components/native';
 import {useTheme} from 'styled-components';
 import {useSelector} from 'react-redux';
+import FastImage from 'react-native-fast-image';
 
 type Props = {
   item: any;
@@ -41,7 +42,6 @@ const shareOptions = url => {
 const Pin = ({item}: Props) => {
   // const theme = useTheme();
   const navigation = useNavigation();
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const activeTheme = useSelector(state => state.theme.value);
 
@@ -69,7 +69,7 @@ const Pin = ({item}: Props) => {
       {/* <View style={styles().pageContainer}> */}
       <PageView x={10}>
         <View style={styles().imageContainer}>
-          <Image
+          {/* <Image
             onError={() => setError(true)}
             onLoadStart={() => setLoading(true)}
             onLoadEnd={() => setLoading(false)}
@@ -78,6 +78,15 @@ const Pin = ({item}: Props) => {
             alt="aa"
             style={styles(item.width, item.height).image}
             source={{uri: item?.urls.regular}}
+          /> */}
+          <FastImage
+            onError={() => setError(true)}
+            resizeMode={FastImage.resizeMode.contain}
+            style={styles(item.width, item.height).image}
+            source={{
+              uri: item?.urls.regular,
+              priority: FastImage.priority.normal,
+            }}
           />
         </View>
 

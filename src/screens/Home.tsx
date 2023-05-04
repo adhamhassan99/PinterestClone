@@ -17,15 +17,11 @@ import * as Animatable from 'react-native-animatable';
 import styled from 'styled-components/native';
 import {useNavigation} from '@react-navigation/native';
 import {useTheme} from 'styled-components';
-import GoogleSignInBtn from '../components/GoogleSignInBtn/GoogleSignInBtn';
-import auth from '@react-native-firebase/auth';
-import {Button} from 'react-native';
-import {SignOutGoogle} from '../utilities/GoogleSIgnOut';
 
 const PageContainer = styled.View`
   background-color: ${props => props.theme.colors.backgroundColor};
   flex: 1;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
 `;
 
 const IconContainer = styled.Pressable`
@@ -84,8 +80,6 @@ const Home = () => {
       console.log(error);
     }
   }, [activeTheme, dispatch]);
-
-  console.log(auth().currentUser);
 
   return (
     // <View style={styles.screenContainer}>
