@@ -2,22 +2,26 @@ import {
   View,
   Text,
   StyleSheet,
-  Pressable,
   KeyboardAvoidingView,
   TextInput,
 } from 'react-native';
 import React, {useState} from 'react';
-import ActionSheet, {
-  SheetManager,
-  SheetProps,
-} from 'react-native-actions-sheet';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import ActionSheet, {SheetProps} from 'react-native-actions-sheet';
 import {ActionSheetHeader} from '../components';
+import {useSelector} from 'react-redux';
+import {RootState} from '../store';
 
 const CreatBoardSheet = (props: SheetProps) => {
   const [boardName, setBoardName] = useState('');
+  const theme = useSelector((state: RootState) => state.theme.value);
+
   return (
-    <ActionSheet containerStyle={styles.sheetContainer} id={props.sheetId}>
+    <ActionSheet
+      containerStyle={[
+        styles.sheetContainer,
+        {backgroundColor: theme === 'light' ? 'white' : '#292929'},
+      ]}
+      id={props.sheetId}>
       <KeyboardAvoidingView>
         <ActionSheetHeader
           sheetName="CreatBoardSheet"
@@ -25,7 +29,13 @@ const CreatBoardSheet = (props: SheetProps) => {
           mainActionActive={boardName !== ''}
         />
         <View>
-          <Text style={styles.inputLabel}>Board Name</Text>
+          <Text
+            style={[
+              styles.inputLabel,
+              {color: theme === 'light' ? 'black' : 'white'},
+            ]}>
+            Board Name
+          </Text>
           <TextInput
             onChangeText={setBoardName}
             autoFocus

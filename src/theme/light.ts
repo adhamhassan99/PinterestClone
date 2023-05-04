@@ -8,6 +8,7 @@ export default {
     iconActive: 'black',
     iconInactive: '#5f5f5f',
     searchBarIcon: '#5f5f5f',
+    actionSheetBG: 'white',
   },
   fontSizes: {
     small: '5px',

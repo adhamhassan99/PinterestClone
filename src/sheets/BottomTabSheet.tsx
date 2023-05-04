@@ -5,6 +5,8 @@ import ActionSheet, {
   SheetProps,
 } from 'react-native-actions-sheet';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useSelector} from 'react-redux';
+import {RootState} from '../store';
 
 const sheetButtons = [
   {
@@ -28,29 +30,37 @@ const sheetButtons = [
 ];
 
 const BottomTabSheet = (props: SheetProps) => {
+  const theme = useSelector((state: RootState) => state.theme.value);
+
   return (
-    <ActionSheet containerStyle={styles.sheetContainer} id={props.sheetId}>
-      <View style={styles.row}>
+    <ActionSheet
+      containerStyle={styles(theme).sheetContainer}
+      id={props.sheetId}>
+      <View style={styles().row}>
         <Pressable onPress={() => SheetManager.hide(props.sheetId)}>
-          <MaterialCommunityIcons name="close" color={'white'} size={25} />
+          <MaterialCommunityIcons
+            name="close"
+            color={theme === 'light' ? 'black' : 'white'}
+            size={25}
+          />
         </Pressable>
-        <View style={styles.centerTextContainer}>
-          <Text style={[styles.white, styles.centerText]}>
+        <View style={styles().centerTextContainer}>
+          <Text style={[styles(theme).white, styles().centerText]}>
             Start creating now
           </Text>
         </View>
       </View>
-      <View style={[styles.row, styles.buttonsContainer]}>
+      <View style={[styles().row, styles().buttonsContainer]}>
         {sheetButtons.map((button, index) => (
-          <View key={index} style={styles.buttonView}>
-            <Pressable onPress={button.onPress} style={styles.button}>
+          <View key={index} style={styles().buttonView}>
+            <Pressable onPress={button.onPress} style={styles(theme).button}>
               <MaterialCommunityIcons
                 name={button.iconName}
                 size={30}
-                color="white"
+                color={theme === 'light' ? 'black' : 'white'}
               />
             </Pressable>
-            <Text style={styles.buttontext}>{button.title}</Text>
+            <Text style={styles(theme).buttontext}>{button.title}</Text>
           </View>
         ))}
       </View>
@@ -60,44 +70,45 @@ const BottomTabSheet = (props: SheetProps) => {
 
 export default BottomTabSheet;
 
-const styles = StyleSheet.create({
-  sheetContainer: {
-    backgroundColor: '#292929',
-    paddingTop: 15,
-    paddingLeft: 20,
-    paddingBottom: 30,
-  },
-  centerTextContainer: {
-    marginRight: 28,
-    flex: 1,
-    alignItems: 'center',
-  },
-  row: {
-    flexDirection: 'row',
-  },
-  white: {
-    color: 'white',
-  },
-  centerText: {
-    fontWeight: '500',
-    fontSize: 16,
-  },
-  buttonsContainer: {
-    justifyContent: 'center',
-    marginTop: 20,
-  },
-  button: {
-    backgroundColor: '#4b4b4b',
-    padding: 17,
-    marginHorizontal: 13,
-    borderRadius: 17,
-  },
-  buttonView: {
-    alignItems: 'center',
-  },
-  buttontext: {
-    color: 'white',
-    marginTop: 5,
-    fontWeight: '500',
-  },
-});
+const styles = (theme: string = '') =>
+  StyleSheet.create({
+    sheetContainer: {
+      backgroundColor: theme === 'light' ? 'white' : '#292929',
+      paddingTop: 15,
+      paddingLeft: 20,
+      paddingBottom: 30,
+    },
+    centerTextContainer: {
+      marginRight: 28,
+      flex: 1,
+      alignItems: 'center',
+    },
+    row: {
+      flexDirection: 'row',
+    },
+    white: {
+      color: theme === 'light' ? 'black' : 'white',
+    },
+    centerText: {
+      fontWeight: '500',
+      fontSize: 16,
+    },
+    buttonsContainer: {
+      justifyContent: 'center',
+      marginTop: 20,
+    },
+    button: {
+      backgroundColor: theme === 'light' ? 'lightgrey' : '#4b4b4b',
+      padding: 17,
+      marginHorizontal: 13,
+      borderRadius: 17,
+    },
+    buttonView: {
+      alignItems: 'center',
+    },
+    buttontext: {
+      color: theme === 'light' ? 'black' : 'white',
+      marginTop: 5,
+      fontWeight: '500',
+    },
+  });
